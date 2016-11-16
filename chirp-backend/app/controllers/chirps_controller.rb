@@ -15,6 +15,9 @@ class ChirpsController < ApplicationController
   end
 
   def edit
+    chirp = Chirp.find(params[:id])
+
+    render :json => chirp, status: 200
   end
 
   def update

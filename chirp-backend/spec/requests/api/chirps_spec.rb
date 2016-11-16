@@ -10,7 +10,7 @@ describe "Chirp API Tests" do
 
   it "POST /chirps should return 201" do
     user = User.create(username:"test",image:"test.jpg",password:"password")
-    
+
     post "/chirps", params: {
       chirp: {
         user_id: user.id,
@@ -21,4 +21,24 @@ describe "Chirp API Tests" do
     expect(response).to have_http_status(201)
   end
 
+  it "POST /chirps should return 400 for bad request" do
+
+    post "/chirps", params: {
+      chirp: {
+        user_id: 1,
+        content: "This is a test chirp."
+      }
+    }
+
+    expect(response).to have_http_status(400)
+  end
+
+  it "GET /chirps/:id/edit should return 200" do
+    user = User.create(username:"test",image:"test.jpg",password:"password")
+    chirp = user.chirps.create(content:"Test chirp!")
+
+    get "/chirps/#{chirp.id}/edit"
+
+    expect(response).to have_http_status(200)
+  end
 end
