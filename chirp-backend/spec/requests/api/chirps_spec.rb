@@ -55,4 +55,14 @@ describe "Chirp API Tests" do
 
     expect(response).to have_http_status(204)
   end
+
+  it "DELETE /chirps/:id/ should return 200" do
+    user = User.create(username:"test",image:"test.jpg",password:"password")
+    chirp = user.chirps.create(content:"Test chirp!")
+
+    delete "/chirps/#{user.id}"
+
+    expect(response).to have_http_status(200)
+  end
+  
 end

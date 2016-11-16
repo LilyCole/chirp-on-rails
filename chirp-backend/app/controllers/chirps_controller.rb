@@ -26,11 +26,17 @@ class ChirpsController < ApplicationController
     if chirp.update_attributes(chirp_params)
       render :json => {success: "Chirp updated successfully"}, status: 204
     else
-      render :json => {error: "Failed to update User"}, status: 400
+      render :json => {error: "Failed to update Chirp"}, status: 400
     end
   end
 
   def destroy
+    chirp = Chirp.find(params[:id])
+    if chirp.destroy
+      render :json => {success: "Chirp deleted successfully"}, status: 200
+    else
+      render :json => {error: "Chirp deletion failed"}, status: 400
+    end
   end
 
   private
