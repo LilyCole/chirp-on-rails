@@ -4,7 +4,7 @@ app.config(function($routeProvider) {
   $routeProvider
     .when("/chirps", {
       templateUrl: "templates/chirp-list.html",
-      controller: "ChripsController",
+      controller: "ChirpsController",
       controllerAs: "chirpsCtrl"
     })
     .otherwise({
@@ -12,8 +12,7 @@ app.config(function($routeProvider) {
     })
 });
 
-app.controller("ChripsController", function($http, AuthService) {
-  AuthService.isAuthenticated();
+app.controller("ChirpsController", function($http) {
 
   var vm = this;
 
@@ -22,6 +21,7 @@ app.controller("ChripsController", function($http, AuthService) {
   url: 'http://localhost:3000/chirps',
     }).success(function(response) {
         vm.chirps = response;
+        console.log(vm.chirps);
     }).error(function(response) {
         alert("Error getting chirps");
     });
