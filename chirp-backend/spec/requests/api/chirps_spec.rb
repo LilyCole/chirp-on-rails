@@ -41,4 +41,18 @@ describe "Chirp API Tests" do
 
     expect(response).to have_http_status(200)
   end
+
+  it "PUT /chirps/:id should return 204" do
+    user = User.create(username:"test",image:"test.jpg",password:"password")
+    chirp = user.chirps.create(content:"Test chirp!")
+
+    put "/chirps/#{chirp.id}", params: {
+      chirp: {
+        user_id: user.id,
+        content: "Editing this chirp."
+      }
+    }
+
+    expect(response).to have_http_status(204)
+  end
 end
