@@ -9,7 +9,7 @@ describe "Chirp API Tests" do
   end
 
   it "POST /chirps should return 201" do
-    user = User.create(username:"test",image:"test.jpg",password:"password")
+    user = User.create(email:"test@test.com",password:"password")
 
     post "/chirps", params: {
       chirp: {
@@ -34,7 +34,7 @@ describe "Chirp API Tests" do
   end
 
   it "GET /chirps/:id/edit should return 200" do
-    user = User.create(username:"test",image:"test.jpg",password:"password")
+    user = User.create(email:"test@test.com",password:"password")
     chirp = user.chirps.create(content:"Test chirp!")
 
     get "/chirps/#{chirp.id}/edit"
@@ -43,7 +43,7 @@ describe "Chirp API Tests" do
   end
 
   it "PUT /chirps/:id should return 204" do
-    user = User.create(username:"test",image:"test.jpg",password:"password")
+    user = User.create(email:"test@test.com",password:"password")
     chirp = user.chirps.create(content:"Test chirp!")
 
     put "/chirps/#{chirp.id}", params: {
@@ -57,7 +57,7 @@ describe "Chirp API Tests" do
   end
 
   it "DELETE /chirps/:id/ should return 200" do
-    user = User.create(username:"test",image:"test.jpg",password:"password")
+    user = User.create(email:"test@test.com",password:"password")
     chirp = user.chirps.create(content:"Test chirp!")
 
     delete "/chirps/#{user.id}"
